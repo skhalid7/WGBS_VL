@@ -1,0 +1,81 @@
+BootStrap: docker
+From: continuumio/miniconda3
+
+%labels
+	Author ShareefKhalid
+	Version 0.1
+	Description Singularity container for WGBS processing pipeline with Miniconda
+
+%post
+	set -e
+	# Update and install base dependencies
+	apt-get update && apt-get install -y \
+	default-jre \
+	default-jdk \
+	samtools \
+	cutadapt \
+	wget \
+	curl \
+	unzip \
+	bzip2 \
+	gzip \
+	libbz2-dev \
+	liblzma-dev \
+	cpanminus \
+	libgd-dev
+	
+	# Install FastQC, keep binary remove everything else
+	cd /opt
+	wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.9.zip
+	unzip fastqc_v0.11.9.zip
+	rm fastqc_v0.11.9.zip
+	chmod +x /opt/FastQC/fastqc
+	cp /opt/FastQC/fastqc /usr/local/bin/
+	rm -rf /opt/FastQC
+	
+	# Install Trim Galore
+	cd /opt
+	curl -fsSL https://github.com/FelixKrueger/TrimGalore/archive/0.6.10.tar.gz -o trim_galore.tar.gz
+	tar xvzf trim_galore.tar.gz
+	rm trim_galore.tar.gz
+	cp /opt/TrimGalore-0.6.10/trim_galore /usr/local/bin
+	rm -rf /opt/TrimGalore-0.6.10/
+
+	#Install Bowtie2
+	cd /opt
+	wget https://github.com/BenLangmead/bowtie2/releases/download/v2.5.4/bowtie2-2.5.4-linux-x86_64.zip
+	unzip bowtie2-2.5.4-linux-x86_64.zip
+	rm bowtie2-2.5.4-linux-x86_64.zip
+	
+	#Install Bismark
+	cd /opt
+	curl -L https://github.com/FelixKrueger/Bismark/archive/refs/tags/v0.24.2.tar.gz -o bismark.v0.24.2.tar.gz
+	tar -xvf bismark.v0.24.2.tar.gz
+	rm bismark.v0.24.2.tar.gz
+	
+	#get Picard jar
+	mkdir -p /opt/picard
+	cd /opt/picard
+	wget https://github.com/broadinstitute/picard/releases/download/3.2.0/picard.jar
+
+	#get GATK
+	cd /opt
+	wget https://github.com/broadinstitute/gatk/releases/download/4.6.0.0/gatk-4.6.0.0.zip
+	unzip gatk-4.6.0.0.zip
+	rm gatk-4.6.0.0.zip
+	mkdir -p /opt/gatk4
+	cp /opt/gatk-4.6.0.0/gatk-package-4.6.0.0-local.jar /opt/gatk4/
+	rm -rf /opt/gatk-4.6.0.0/
+
+	#python dependencies
+	pip3 install argparse
+        
+%environment
+	export PATH="/opt/Bismark-0.24.2:/opt/bowtie2-2.5.4-linux-x86_64:$PATH" #add bismark and bowtie execs to path variables
+	export GATK="/opt/gatk4/gatk-package-4.6.0.0-local.jar"
+	export PICARD="/opt/picard/picard.jar"
+
+%runscript
+	# This is what runs when the container is executed
+	exec "$@"
+	

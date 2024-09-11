@@ -26,7 +26,7 @@ trimmed_r2="${output_dir}/${filename}_trimmed_val_2.fq.gz"
 # Step 2: Run bismark using the trimmed reads
 echo "Running bismark..."
 cores_bismark=$(echo $cores | awk '{print int($0 / 3)}') #bismark needs some extra cores because it runs bowtie on 4 cores. If you specify 4 cores it will run on 8 as per its documentation
-bismark -o $output_dir $ref -1 $trimmed_r1 -2 $trimmed_r2 --parallel $cores_bismark
+bismark -o $output_dir $ref -1 $trimmed_r1 -2 $trimmed_r2 --parallel $cores_bismark --temp-dir $output_dir
 
 # Step 3: Sorting the BAM file
 echo "Sorting BAM file..."

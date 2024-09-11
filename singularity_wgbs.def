@@ -26,13 +26,11 @@ From: continuumio/miniconda3
 	
 	# Install FastQC, keep binary remove everything else
 	cd /opt
-	wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.9.zip
-	unzip fastqc_v0.11.9.zip
-	rm fastqc_v0.11.9.zip
+	wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.12.1.zip
+	unzip fastqc_v0.12.1.zip
+	rm fastqc_v0.12.1.zip
 	chmod +x /opt/FastQC/fastqc
-	cp /opt/FastQC/fastqc /usr/local/bin/
-	rm -rf /opt/FastQC
-	
+		
 	# Install Trim Galore
 	cd /opt
 	curl -fsSL https://github.com/FelixKrueger/TrimGalore/archive/0.6.10.tar.gz -o trim_galore.tar.gz
@@ -71,7 +69,7 @@ From: continuumio/miniconda3
 	pip3 install argparse
         
 %environment
-	export PATH="/opt/Bismark-0.24.2:/opt/bowtie2-2.5.4-linux-x86_64:$PATH" #add bismark and bowtie execs to path variables
+	export PATH="/opt/Bismark-0.24.2:/opt/bowtie2-2.5.4-linux-x86_64:/opt/FastQC/:$PATH" #add bismark, bowtie, fastqc to path
 	export GATK="/opt/gatk4/gatk-package-4.6.0.0-local.jar"
 	export PICARD="/opt/picard/picard.jar"
 

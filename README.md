@@ -15,11 +15,9 @@ python /mnt/processing/WGBS_script_launcher.py \
 
 
 ## Output Files
-sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.bismark.cov.gz: 
-#Chr Pos_start Pos_end methylated% methylated_read un_methylated_reads
-
-sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.bismark.bedGraph.gz: (UCSC filename)
-#Chr Pos_start Pos_end %methylated
-
-sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.M-bias.txt:
-Per read methylation contexts, header is self explanatory
+1. sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.bismark.cov.gz:<br>
+   Chr  Pos_start  Pos_end  methylated%  methylated_read  un_methylated_reads
+2. sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.bismark.bedGraph.gz: (UCSC format)<br>
+  Chr  Pos_start  Pos_end  %methylated
+3. sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.M-bias.txt:<br>
+  Per read methylation contexts, header is self explanatory

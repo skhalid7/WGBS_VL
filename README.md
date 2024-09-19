@@ -12,3 +12,14 @@ python /mnt/processing/WGBS_script_launcher.py \
 --adapter_sequence1 ATGCA \
 --adapter_sequence2 AGATC
 ````
+
+
+## Output Files
+sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.bismark.cov.gz: 
+#Chr Pos_start Pos_end methylated% methylated_read un_methylated_reads
+
+sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.bismark.bedGraph.gz: (UCSC filename)
+#Chr Pos_start Pos_end %methylated
+
+sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.M-bias.txt:
+Per read methylation contexts, header is self explanatory

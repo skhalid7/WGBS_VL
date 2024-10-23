@@ -1,5 +1,5 @@
 # WGBS_VL
-Example command:
+# Example command for WGBS commands:
 ```bash
 singularity exec --bind /gpfs/path/to/reads:/mnt --bind /additional/path/:/genome \
 WGBS_pipeline.sif \
@@ -21,7 +21,7 @@ python /mnt/processing/WGBS_script_launcher.py \
   Per read methylation contexts, header is self explanatory
 
 
-Example command for WGS processing files:
+# Example command for WGS processing files:
 ```bash
 #!/bin/bash
 

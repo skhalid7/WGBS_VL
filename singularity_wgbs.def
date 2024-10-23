@@ -12,6 +12,7 @@ From: continuumio/miniconda3
 	apt-get update && apt-get install -y \
 	default-jre \
 	default-jdk \
+	build-essential \
 	samtools \
 	cutadapt \
 	wget \
@@ -30,7 +31,7 @@ From: continuumio/miniconda3
 	unzip fastqc_v0.12.1.zip
 	rm fastqc_v0.12.1.zip
 	chmod +x /opt/FastQC/fastqc
-		
+	
 	# Install Trim Galore
 	cd /opt
 	curl -fsSL https://github.com/FelixKrueger/TrimGalore/archive/0.6.10.tar.gz -o trim_galore.tar.gz
@@ -67,9 +68,18 @@ From: continuumio/miniconda3
 
 	#python dependencies
 	pip3 install argparse
+	
+	#install bwa
+	cd /opt
+	wget https://github.com/lh3/bwa/archive/refs/tags/v0.7.18.zip
+	unzip v0.7.18.zip
+	cd bwa-0.7.18
+	make
+	cd ..
+	rm v0.7.18.zip
         
 %environment
-	export PATH="/opt/Bismark-0.24.2:/opt/bowtie2-2.5.4-linux-x86_64:/opt/FastQC/:$PATH" #add bismark, bowtie, fastqc to path
+	export PATH="/opt/bwa-0.7.18/:/opt/Bismark-0.24.2:/opt/bowtie2-2.5.4-linux-x86_64:/opt/FastQC/:$PATH" #add bismark, bowtie,fastqc to path
 	export GATK="/opt/gatk4/gatk-package-4.6.0.0-local.jar"
 	export PICARD="/opt/picard/picard.jar"
 

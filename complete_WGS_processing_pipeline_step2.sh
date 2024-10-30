@@ -14,7 +14,7 @@ echo $sample_name
 ls ${path_2_files}/*${sample_name}*RG.bam
 
 echo 'Merginging bams...'
-samtools merge -@ $cores ${path_2_files}/${sample_name}.RG.merged.bam ${path_2_files}/*${sample_name}*RG.bam
+samtools merge -@ $cores ${path_2_files}/${sample_name}.RG.merged.bam ${path_2_files}/*${sample_name}_*RG.bam
 
 echo 'Merge and index...'
 samtools sort -@ $cores -o ${path_2_files}/${sample_name}.RG.merged.sort.bam ${path_2_files}/${sample_name}.RG.merged.bam

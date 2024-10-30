@@ -1,0 +1,26 @@
+BootStrap: docker
+From: r-base
+
+%labels
+    Author YourName
+    Version 1.0
+    Description Singularity container with R-base and methylkit from Bioconductor
+
+%post
+    # Update system and install any required system dependencies for R packages
+    apt-get update && apt-get install -y \
+        libcurl4-openssl-dev \
+        libssl-dev \
+        libxml2-dev
+
+    # Install BiocManager in R and use it to install methylKit
+    echo 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager", repos="https://cran.r-project.org")' | R --no-save
+    echo 'BiocManager::install("methylKit", ask=FALSE)' | R --no-save
+
+%environment
+    # Set up any environment variables if needed
+    export PATH="/usr/local/bin:$PATH"
+
+%runscript
+    # This will run when the container is executed
+    exec "$@"

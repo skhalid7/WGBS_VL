@@ -1,5 +1,6 @@
 # WGBS_VL
 # Example command for WGBS commands:
+Python script launches two scripts step 1 and step 2
 ```bash
 singularity exec --bind /gpfs/path/to/reads:/mnt --bind /additional/path/:/genome \
 WGBS_pipeline.sif \
@@ -11,6 +12,7 @@ python /mnt/processing/WGBS_script_launcher.py \
 --filename sample_name\
 --adapter_sequence1 ATGCA \
 --adapter_sequence2 AGATC
+--step [1/2]
 ````
 ## Output Files
 1. sample_name_bismark_bt2_pe.sorted.RG.mkdups.resort.bismark.cov.gz:<br>
